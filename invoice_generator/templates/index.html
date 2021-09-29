@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('invoice_generator.static', filename='main.css') }}" />
+
+    <title>create invocice</title>
+  </head>
+  <body>
+    <h1>Create New Invoice</h1>
+
+    <form class="pdf-form">
+      <div class="title-wrapper">
+        <label for="pdfname">Title</label>
+        <input
+          type="text"
+          name="pdfname"
+          id="pdfname"
+          required
+          placeholder="name of the pdf file"
+        />
+      </div>
+      <div class="form-row" id="1">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          name="description"
+          id="desc"
+          required
+          placeholder="item description"
+          value="Default valueeee"
+        />
+        <label for="quantity">Quantity</label>
+        <input
+          type="number"
+          name="quantity"
+          id="qty"
+          required
+          value="1"
+          min="1"
+          max="100000"
+        />
+        <label for="price">Price</label>
+        <input
+          type="number"
+          name="price"
+          id="price"
+          required
+          placeholder="item price"
+          value="10"
+          min="1"
+          max="1000000"
+        />
+      </div>
+
+      <div class="btns-wrapper">
+        <button id="add-row-btn" type="button" onclick="addRow(event)">
+          +
+        </button>
+        <button class="draw-sig-btn btn" type="button" onclick="drawSig(event)">
+          Draw your signature
+        </button>
+        <button
+          class="submit-btn btn"
+          type="submit"
+          onclick="sumbitData(event)"
+        >
+          Create PDF
+        </button>
+      </div>
+    </form>
+
+    <div id="sigModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <canvas id="sigCanva"></canvas>
+        <div class="btns-wrapper">
+          <button class="savesig-btn btn" type="button">Save signature</button>
+          <button class="clearsig-btn btn" type="button">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+    <script src="{{ url_for('invoice_generator.static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('invoice_generator.static', filename='js/sig.js') }}"></script>
+  </body>
+</html>
